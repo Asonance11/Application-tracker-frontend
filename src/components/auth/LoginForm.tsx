@@ -70,7 +70,12 @@ const LoginForm = () => {
           )}
         />
 
-        <Button variant="default" className="w-full" disabled={isLoading}>
+        <Button
+          type="submit"
+          variant="default"
+          className="w-full"
+          disabled={isLoading}
+        >
           {isLoading ? <Loading /> : "Sign in"}
         </Button>
       </form>
