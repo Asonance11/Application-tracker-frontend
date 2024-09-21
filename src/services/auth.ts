@@ -3,7 +3,7 @@ import { User, UserInput } from "@/types/index";
 import axios from "axios";
 import { toast } from "sonner";
 
-export async function Login(values: UserInput): Promise<User | null> {
+export async function login(values: UserInput): Promise<User | null> {
   try {
     const response = await axios.post(
       `${API_URL}/login`,

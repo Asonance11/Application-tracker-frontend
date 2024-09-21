@@ -15,6 +15,9 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../ui/password-input";
 import { Button } from "../ui/button";
 import { Loading } from "../common/Loaders";
+import { login } from "@/services/auth";
+import { useUser } from "@/store/use-auth-store";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(1, {
@@ -26,6 +29,10 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
+  const { updateUser } = useUser();
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,7 +42,11 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const user = await login(values);
+    if (user) {
+      updateUser(user);
+      router.push("/dashboard");
+    }
   };
 
   const isLoading = form.formState.isSubmitting;
