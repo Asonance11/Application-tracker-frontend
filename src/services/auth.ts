@@ -34,3 +34,26 @@ export async function login(values: UserInput): Promise<User | null> {
     return null;
   }
 }
+
+export async function getUser(): Promise<User | null> {
+  try {
+    const response = await axios.get(`${API_URL}/api/user`, {
+      withCredentials: true,
+    });
+    if (response.status === 200) {
+      return response.data.user;
+    } else {
+      throw new Error("Unexpected response from server");
+    }
+  } catch (error) {
+    console.error("[LOGIN_ERROR]", error);
+
+    if (axios.isAxiosError(error) && error.response?.data?.error) {
+      console.log(error.response.data.error);
+    } else {
+      console.log("Something went wrong, please try again");
+    }
+
+    return null;
+  }
+}
