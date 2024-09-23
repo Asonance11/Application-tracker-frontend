@@ -19,12 +19,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { fetchJobApplications } from "@/services/jobs";
-import { Job } from "@/types";
+import { Job, JobFromDB } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 interface JobApplicationsResponse {
-  jobs: Job[];
+  jobs: JobFromDB[];
   page: number;
   pageSize: number;
   totalPages: number;
@@ -74,7 +74,7 @@ const DashBoardPage = () => {
               <TableCell colSpan={3}>Error fetching jobs</TableCell>
             </TableRow>
           ) : (
-            data?.jobs?.map((job) => <JobTableRow job={job} key={job.id} />)
+            data?.jobs?.map((job) => <JobTableRow job={job} key={job.ID} />)
           )}
         </TableBody>
       </Table>
