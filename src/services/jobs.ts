@@ -1,9 +1,9 @@
 import { API_URL } from "@/lib/config";
-import { Job } from "@/types";
+import { Job, JobFromDB, JobInput } from "@/types";
 import axios from "axios";
 
 interface JobApplicationsResponse {
-  jobs: Job[];
+  jobs: JobFromDB[];
   page: number;
   pageSize: number;
   totalPages: number;
@@ -23,5 +23,19 @@ export const fetchJobApplications = async ({
     params: { page, pageSize },
     withCredentials: true,
   });
+  return response.data;
+};
+
+export const createJob = async (values: JobInput) => {
+  const response = await axios.post(
+    `${API_URL}/api/jobs`,
+    {
+      role: values.role,
+      companyName: values.companyName,
+      expectedSalary: values.expectedSalary,
+    },
+    { withCredentials: true },
+  );
+
   return response.data;
 };
