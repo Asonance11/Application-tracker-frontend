@@ -41,7 +41,7 @@ const DashBoardPage = () => {
   });
 
   return (
-    <section>
+    <section className="px-8">
       <Table>
         <TableHeader>
           <TableRow>
