@@ -36,5 +36,14 @@ export interface JobInput {
   role: string;
   companyName: string;
   expectedSalary: number;
-  status: JobStatus;
+  status?: JobStatus;
+}
+
+export interface JobFromDB {
+  ID: number;
+  Role: string;
+  CompanyName: string;
+  ExpectedSalary: number;
+  Status: string;
+  // Add any other fields that come from the DB
 }
