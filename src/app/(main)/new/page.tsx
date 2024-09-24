@@ -57,7 +57,7 @@ const NewPage = () => {
   const mutation = useMutation({
     mutationFn: createJob,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["jobApplication"] });
+      queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
       toast.success("Job application created successfully");
       form.reset();
     },
@@ -154,7 +154,11 @@ const NewPage = () => {
             )}
           />*/}
 
-          <Button type="submit" className="w-full" disabled={mutation.isPending}>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={mutation.isPending}
+          >
             {mutation.isPending ? <Loading /> : "Create"}
           </Button>
         </form>
