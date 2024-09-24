@@ -33,6 +33,7 @@ export interface UserInput {
 }
 
 export interface JobInput {
+  id?: number;
   role: string;
   companyName: string;
   expectedSalary: number;
@@ -44,6 +45,6 @@ export interface JobFromDB {
   Role: string;
   CompanyName: string;
   ExpectedSalary: number;
-  Status: string;
+  Status: JobStatus;
   // Add any other fields that come from the DB
 }
