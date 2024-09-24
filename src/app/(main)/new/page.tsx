@@ -154,8 +154,8 @@ const NewPage = () => {
             )}
           />*/}
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? <Loading /> : "Create"}
+          <Button type="submit" className="w-full" disabled={mutation.isPending}>
+            {mutation.isPending ? <Loading /> : "Create"}
           </Button>
         </form>
       </Form>
