@@ -9,12 +9,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
+import { useModal } from "@/store/use-modal-store";
 
 interface JobTableRowProps {
   job: JobFromDB;
 }
 
 export const JobTableRow: React.FC<JobTableRowProps> = ({ job }) => {
+  const { onOpen } = useModal();
+
   return (
     <TableRow>
       <TableCell>{job.Role}</TableCell>
@@ -29,7 +32,9 @@ export const JobTableRow: React.FC<JobTableRowProps> = ({ job }) => {
           <DropdownMenuContent>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onOpen("editJobModal", { job })}>
+              Edit
+            </DropdownMenuItem>
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
