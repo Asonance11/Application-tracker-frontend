@@ -39,3 +39,18 @@ export const createJob = async (values: JobInput) => {
 
   return response.data;
 };
+
+export const editJob = async (values: JobInput) => {
+  const response = await axios.put(
+    `${API_URL}/api/jobs/${values.id}`,
+    {
+      role: values.role,
+      companyName: values.companyName,
+      expectedSalary: values.expectedSalary,
+      status: values.status,
+    },
+    { withCredentials: true },
+  );
+
+  return response.data;
+};

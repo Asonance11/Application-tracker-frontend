@@ -29,6 +29,10 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { JobStatus } from "@/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { editJob } from "@/services/jobs";
+import { toast } from "sonner";
+import { Loading } from "../common/Loaders";
 
 const formSchema = z.object({
   role: z.string().min(1, {
@@ -40,12 +44,12 @@ const formSchema = z.object({
   expectedSalary: z.number({
     required_error: "Salary cannot be empty",
   }),
-  status: z.string({
-    required_error: "Status cannot be empty",
-  }),
+  status: z.nativeEnum(JobStatus),
 });
 
 const EditJobModal = () => {
+  const queryClient = useQueryClient();
+
   const { isOpen, type, data, onClose } = useModal();
 
   const isModalOpen = isOpen && type === "editJobModal";
@@ -58,7 +62,7 @@ const EditJobModal = () => {
       role: "",
       companyName: "",
       expectedSalary: 0,
-      status: "",
+      status: job?.Status || JobStatus.Applied,
     },
   });
 
@@ -71,8 +75,21 @@ const EditJobModal = () => {
     }
   }, [form, job]);
 
+  const mutation = useMutation({
+    mutationFn: editJob,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
+      toast.success("Job updated successfully");
+      handleClose();
+    },
+    onError: (error) => {
+      console.error("Failed to update job application:", error);
+      toast.error("Failed to update job application");
+    },
+  });
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    mutation.mutate({ ...values, id: job?.ID });
   };
 
   const handleClose = () => {
@@ -166,8 +183,12 @@ const EditJobModal = () => {
               )}
             />
 
-            <Button type="submit" className="w-full">
-              Edit
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? <Loading /> : "Edit"}
             </Button>
           </form>
         </Form>

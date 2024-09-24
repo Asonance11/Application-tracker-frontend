@@ -3,7 +3,6 @@ import { Public_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
-import AuthProvider from "@/components/providers/auth-provider";
 import { ModalProvider } from "@/components/providers/modal-provider";
 
 const font = Public_Sans({
@@ -26,8 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className} antialiased bg-bg`}>
-        <QueryProvider>{children}</QueryProvider>
-        <ModalProvider />
+        <QueryProvider>
+          <ModalProvider />
+          {children}
+        </QueryProvider>
         <Toaster richColors />
       </body>
     </html>
