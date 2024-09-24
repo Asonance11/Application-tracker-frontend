@@ -53,19 +53,19 @@ const DashBoardPage = () => {
         </TableHeader>
         <TableBody>
           {isLoading ? (
-            [...Array(8)].map((_, index) => (
+            [...Array(5)].map((_, index) => (
               <TableRow key={index}>
-                <TableCell className="text-right">
-                  <Skeleton className="h-5 w-[100px] ml-auto" />
+                <TableCell className="">
+                  <Skeleton className="h-5 w-[100px]" />
                 </TableCell>
-                <TableCell className="text-right">
-                  <Skeleton className="h-5 w-[100px] ml-auto" />
+                <TableCell className="">
+                  <Skeleton className="h-5 w-[100px]" />
                 </TableCell>
-                <TableCell className="text-right">
-                  <Skeleton className="h-5 w-[100px] ml-auto" />
+                <TableCell className="">
+                  <Skeleton className="h-5 w-[100px]" />
                 </TableCell>
-                <TableCell className="text-right">
-                  <Skeleton className="h-5 w-[100px] ml-auto" />
+                <TableCell className="">
+                  <Skeleton className="h-5 w-[100px]" />
                 </TableCell>
               </TableRow>
             ))
