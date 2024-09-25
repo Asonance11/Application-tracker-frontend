@@ -54,3 +54,11 @@ export const editJob = async (values: JobInput) => {
 
   return response.data;
 };
+
+export const deleteJob = async (id: number) => {
+  const response = await axios.delete(
+    `${API_URL}/api/jobs/${id}`,
+  )
+
+  return response.data
+}
