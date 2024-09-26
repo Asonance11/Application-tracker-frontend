@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { fetchJobApplications } from "@/services/jobs";
-import { Job, JobFromDB } from "@/types";
+import { JobFromDB } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 

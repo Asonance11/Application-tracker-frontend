@@ -1,5 +1,5 @@
 import { API_URL } from "@/lib/config";
-import { Job, JobFromDB, JobInput } from "@/types";
+import { JobFromDB, JobInput } from "@/types";
 import axios from "axios";
 
 interface JobApplicationsResponse {
